@@ -9,7 +9,8 @@
 <body>
 	여기는 ${company}입니다.
 	<form action="/spring/test" method="post">
-		<input name="id">
+		<input name="num">
+		<input name="num2">
 		<button type="submit">재출</button>
 	</form>
 </body>

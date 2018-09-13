@@ -23,15 +23,11 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+	public String home(Locale locale, Model model, Integer num, Integer num2, Integer res) {
+
+		model.addAttribute("num",  num);
+		model.addAttribute("num2",  num2);
+		model.addAttribute("res", res);
 		
 		return "home";
 	}
@@ -43,10 +39,16 @@ public class HomeController {
 	   }
 	
 	@RequestMapping(value="/test", method =  RequestMethod.POST)
-	public String testPost(Model model, String id) {
-		System.out.println("id : " + id);
-		model.addAttribute("company", id);
-	      return "test/test";
+	public String testPost(Model model, Integer num, Integer num2) {
+		System.out.println("숫자 1 : " + num);
+		System.out.println("숫자 2 : " + num2);
+		if(num == null) num = 0;
+		if(num2 == null) num2 = 0;
+		Integer res = num + num2;
+		model.addAttribute("num",  num);
+		model.addAttribute("num2",  num2);
+		model.addAttribute("res", res);
+	      return "redirect:/";
 	   }
 	
 	
