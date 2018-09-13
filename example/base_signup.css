@@ -1,0 +1,72 @@
+@charset 'utf-8';
+*{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+div{
+    font-weight: 100;
+    /* - 글자의 굵기를 조정
+       - 100~900 사이의 값을 가질 수 있다.
+       - bold : 700 */
+    font-size: 14px;
+    /* - 글자의 크기를 조정 */
+    color: black;
+    /* - 글자의 색을 조정
+       - 값으로 지정된 색상 이름으로 사용 가능 ex) red;
+       - 또한 색상코드로도 된다. ex) #ff0000; (빨강색)
+       - 또한, rbg 함수를 이용하여 사용 가능하다. ex) rgb(255, 0, 0); (빨강색)
+       - rgba 함수를 이용하여 사용 가능하다. ex) rgba(255, 0, 0, 1); (빨강색) */
+    text-align: left;
+    /* 글자 정렬 */
+    display: block;
+    /* display를 통해서 태그의 기본 값을 바꿀 수 있다.
+     display : inline-block : inline과 block의 장점을 합쳐서 합친 것이다.
+     = 크기 조절도 가능하고, 뒤에 연달아 붙일 수 있게 한 것이다. */
+    /* border-width: 1px; 선 굵기
+    border-style: solid;
+    border-color: beige;
+    위에 있는거 3개를 합친 것이 border이다. */
+    /* border: solid 1px black */
+     /* 적는 순서는 상관이 없다. */
+}
+
+/* 인터넷 창에서 F12를 누르면 개발자 도구가 나온다. */
+
+.container{
+    width: 400px;
+    /* 가로의 길이 지정 */
+    margin: 0 auto;
+    /* 위에 있는 것은 가운데 자동 맞춤
+    margin: 10px 0px 0px 10px; 순서 위-오른쪽-아래-왼쪽
+    이 아래에 있는 것을 합친 것이 위에 있는 것이다.
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    다른 방법 : margin: 0px = 여백을 하나도 안 주는 것
+               margin: 10px 20px = 위아래는 여백 10px, 오른쪽 왼쪽은 20px
+    */
+}
+
+.input-form{
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    height: 25px;
+}
+
+.display-flex{
+    display:flex;
+}
+
+input[type="text"], [type="password"], [type="email"]{
+    width: 300px;
+}
+
+#submit{
+    margin-left: 100px;
+    width: 300px;
+    height: 30px;
+}
