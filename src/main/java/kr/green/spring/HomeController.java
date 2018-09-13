@@ -52,4 +52,19 @@ public class HomeController {
 	   }
 	
 	
+	@RequestMapping(value="/signup", method = RequestMethod.GET)
+	public String signupGet() {
+		return "member/signup";
+	}
+	
+	@RequestMapping(value="/signup", method = RequestMethod.POST)
+	public String signupPost(String id, String password, String pwConfirm, String gender, String email) {
+		System.out.println("id : " + id);
+		System.out.println("pw : " + password);
+		System.out.println("pwComfirm : "+ pwConfirm);
+		System.out.println("gender : " + gender);
+		System.out.println("email : " + email);
+		return "redirect:/signup";
+	}
+	
 }
