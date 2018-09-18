@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{ /* border-box: 테두리를 포함한 박스사이즈 */
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+    body>.div1{ /*body태그 바로 안에 있는 class=div1만 : 일부*/
+        color: red;
+    }
+    /* .div1{ 모든 class=div1인 것만
+        color: green
+    } */
+    body .div2{ /* '>' 이 표시가 있는게 더 강하다. */
+        color: blue;
+    }
+    div.div2{ /* 이것은 경우의 수가 하나 이기 때문에 얘가 더 강하다.
+                 div class="div2"인 경우인 경우만 이 색임
+                 nope. 위에 있는 blue랑 우선순위가 같다. 그러나
+                 이것이 마지막에 선언 되었기 때문에, 이것이 적용 */
+        color: yellow;
+    }
+    input[type=text]{
+        font-weight: bold;
+    }
+    input[read
+    only]{
+        color: gray;
+        background-color: yellow;
+    }
+    .div3:hover{
+        color:red;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <div>부모-자식 셀렉터 조합 예제</div>
+    <div class="div1">Hello world</div>
+    <div>
+        <div class="div1">Hello world</div>
+    </div>
+    <div class="div1">Hello world</div>
+    <hr>
+    <div>부모-자손 셀렉터 조합 예제</div>
+    <div class="div2">hi</div>
+    <div>
+        <div class="div2">hi</div>
+    </div>
+    <hr>
+    <div>속성 셀렉터 예제</div>
+    <input type="text">
+    <input type="email" readonly value="123@123">
+    <hr>
+    <div>가상 클래스 예제</div>
+    <div class="div3">Hello World</div>
+</body>
+</html>
