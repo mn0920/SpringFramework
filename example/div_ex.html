@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            margin: 0;
+        }
+        .container{
+            /* height: 100vh; 현재 브라우저의 높이(100)중에서 얼마로 잡을 건지 */
+            min-width: 1100px;
+            background-color: darkgray;
+        }
+        .container>.container-header{
+            font-size: 0px;
+            margin: 0 auto;
+            width : 1100px;
+            height: 47px;
+            border-top: solid 1px gray;
+            border-bottom: solid 1px gray;
+            background-color: white;
+        }
+        .container-header>*{
+            font-size: 14px;
+        }
+        #menu{
+            width:1080px;
+            height: 32px;
+            margin: 0 auto;
+        }
+        .container>.container-body{
+            width: 1100px;
+            height: 1466px;
+            margin: 0 auto;
+            padding: 8px 10px 0 10px;
+            font-size: 0px;
+        }
+        .container>.container-body>*{
+            font-size: 14px;
+        }
+
+        .container-body>.left-box{
+            width: 740px;
+            display: inline-block;
+        }
+        .container-body>.right-box>div,
+        .container-body>.left-box>div{
+            margin-bottom: 8px;
+            border: solid 1px gray;
+            background-color: white;
+        }
+        .container-body>.left-box>.left-box1{
+            height: 120px;
+        }
+        .container-body>.left-box>.left-box2{
+            height: 46px;
+        }
+        .container-body>.left-box>.left-box3{
+            height: 244px;
+        }
+        .container-body>.right-box{
+            width: 332px;
+            display: inline-block;
+            float: right;
+        }
+        .container-body>.right-box>.right-box1{
+            height: 118px;
+        }
+        .container-body>.right-box>.right-box2{
+            height: 140px;
+        }
+        .container-body>.right-box>.right-box3{
+            height: 150px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container-header">
+            <div id="menu">naver</div>
+        </div>
+        <div class="container-body">
+            <div class="left-box">
+                <div class="left-box1"></div>
+                <div class="left-box2"></div>
+                <div class="left-box3"></div>
+            </div>
+            <div class="right-box">
+                <div class="right-box1"></div>
+                <div class="right-box2"></div>
+                <div class="right-box3"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
