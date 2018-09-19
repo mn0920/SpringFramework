@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+	div{
+		display: inline-block;
+		height: 50px;
+		width: 50px;
+		border: 1px solid lightgray;
+		text-align: center;
+		color: white;
+		background: red;
+	}
+	#right_down:hover{
+		position: relative;
+		left: 20px;
+		top: 20px;
+		background: green;
+	}
+	#left_down:hover{
+		position: relative;
+		right: 20px;
+		top: 20px;
+		background: green;
+	}
+	#left_up:hover{
+		position: relative;
+		right: 20px;
+		bottom: 20px;
+		background:green;
+	}
+	#right_up:hover{
+		position: relative;
+		left: 20px;
+		bottom: 20px;
+		background:green;
+	}
+	.absolute{
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.large-box{
+		background-color: white;
+		color: black;
+		width: 500px;
+		height: 300px;
+		position: relative;
+	}
+	.fixed{
+		position: fixed;
+		right: 0;
+		bottom: 0;
+	}
+    </style>
+</head>
+<body>
+	<h3>상대배치, relative:현재 위치를 기준으로 포지션을 적는다</h3>
+	<hr>
+		<div id="left_down">T</div>
+		<div id="right_down">h</div>
+		<div>a</div>
+		<div>n</div>
+		<div id="left_up">k</div>
+		<div id="right_up">s</div>
+	<hr>
+	<h3>절대 배치, absolute:항상 고정 위치</h3>
+	<h6>기본은 브라우저에서 기준을 잡아서 오른쪽 위를 찾는다.</h6>
+	<div class="absolute">ab</div>
+	<hr>
+	<h3>절대 배치, absolute:항상 고정 위치</h3>
+	<h6>상자 안에서 absolute를 하는 방법:겉상자의 포지션을 relative로 준다.</h6>
+	<div class="large-box">
+		<div class="absolute">ab2</div>
+	</div>
+<hr>
+<h3>fixed는 화면안에서 항상 보이는 것이고, 스크롤을 움직여도 보인다.</h3>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div class="fixed">위로</div>
+</body>
+</html>
