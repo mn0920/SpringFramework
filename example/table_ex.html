@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		table, th, td{
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+		/* nth-child()
+		even == 2n : 짝수
+		odd == 2n-1 : 홀수
+		*/
+		tbody>tr:nth-child(even){
+			background-color: paleturquoise;
+		}
+		tbody>tr:nth-child(odd){
+			background-color: aliceblue;
+		}
+	</style>
+</head>
+<body>
+<h4>thead, tbody, tfoot을 사용하면 서로의 위치가 섞여있어도 헤드-바디-풋 순으로 적용된다.</h4>
+  <table width="100%">
+		<thead>
+			<tr>
+				<th width="33.3%">번호</td>
+				<th width="33.3%">이름</td>
+				<th width="33.3%">나이</td>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<td>X</td>
+				<td>X</td>
+				<td>X</td>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>홍길동</td>
+				<td>20</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>홍길동</td>
+				<td>20</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>홍길동</td>
+				<td>20</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
