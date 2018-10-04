@@ -4,14 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>test</title>
 </head>
 <body>
-	여기는 ${company}입니다.
-	<form action="/spring/test" method="post">
-		<input name="num">
-		<input name="num2">
-		<button type="submit">재출</button>
-	</form>
+	${id}님 환영합니다.
 </body>
 </html>

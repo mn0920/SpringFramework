@@ -1,15 +1,15 @@
-package kr.green.spring;
-
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+package kr.green.spring.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import kr.green.spring.service.AccountService;
+import kr.green.spring.vo.AccountVo;
 
 /**
  * Handles requests for the application home page.
@@ -17,24 +17,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private AccountService accountService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model, Integer num, Integer num2, Integer res) {
-
-		model.addAttribute("num",  num);
-		model.addAttribute("num2",  num2);
-		model.addAttribute("res", res);
+	public String homeGet() {
+		return "member/login";
+	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	public String homepost(AccountVo accountVo, Model model) {
+		boolean isLogin = accountService.login(accountVo);
 		
-		return "home";
+		if(!isLogin)
+			return "redirect:/";
+		model.addAttribute("id", accountVo.getId());
+		return "redirect:/test";
 	}
 	
 	@RequestMapping(value="/test", method =  RequestMethod.GET)
-	public String testPost(Model model) {
-		model.addAttribute("company","그린");
+	public String testPost(Model model, String id) {
+		model.addAttribute("id", id);
 	      return "test/test";
 	   }
 	
@@ -58,13 +66,10 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/signup", method = RequestMethod.POST)
-	public String signupPost(String id, String password, String pwConfirm, String gender, String email) {
-		System.out.println("id : " + id);
-		System.out.println("pw : " + password);
-		System.out.println("pwComfirm : "+ pwConfirm);
-		System.out.println("gender : " + gender);
-		System.out.println("email : " + email);
-		return "redirect:/login";
+	public String signupPost(AccountVo accountVo) {
+		if(accountService.signup(accountVo))
+			return "redirect:/";
+		return "redirect:/signup";
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
@@ -73,9 +78,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public String loginPost(String id, String password) {
+	public String loginPost(String id, String pw) {
 		System.out.println("id : " + id);
-		System.out.println("pw : " + password);
+		System.out.println("pw : " + pw);
 		return "redirect:/signup";
 	}
 	
