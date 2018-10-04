@@ -39,6 +39,7 @@
             <input type="email" name="email" id="" placeholder="email" class="form-control">
         </div>
         <div class="form-group">
+        
             <div class="input-form">성별</div>
             <label for="male">남성</label>
             <input type="radio" name="gender" id="male" checked value="male">
