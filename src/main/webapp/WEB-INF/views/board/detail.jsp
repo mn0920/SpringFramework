@@ -18,26 +18,26 @@
 
 <body>
   <div class="container">
-    <h3>게시글</h3>
-    <form method="GET">
-      <div class="form-group">
-        <label for="title">제목</label>
-        <input type="text" name="title" id="title" class="form-control" readonly value="${board.title}">
-      </div>
-      <div class="form-group">
-        <label for="author">작성자</label>
-        <input type="text" name="author" id="author" class="form-control" readonly value="${board.author}">
-      </div>
-      <div class="form-group">
-        <label for="register_date">작성일자</label>
-        <input type="text" name="register_date" id="register_date" class="form-control" readonly value="${board.register_date}">
-      </div>
-      <div class="form-group">
-        <label for="contents">내용</label>
-        <textarea name="contents" id="contents" rows="10" class="form-control" readonly>${board.contents}</textarea>
-      </div>
-      <a href="<%= request.getContextPath() %>/board/list"><button type="button" class="btn btn-primary">목록</button></a>
-    </form>
+  <h3>게시글</h3>
+    <div class="form-group">
+      <label for="title">제목</label>
+      <input type="text" name="title" id="title" class="form-control" readonly value="${board.title}">
+    </div>
+    <div class="form-group">
+      <label for="author">작성자</label>
+      <input type="text" name="author" id="author" class="form-control" readonly value="${board.author}">
+    </div>
+    <div class="form-group">
+      <label for="register_date">작성일자</label>
+      <input type="text" name="register_date" id="register_date" class="form-control" readonly value="${board.register_date}">
+    </div>
+    <div class="form-group">
+      <label for="contents">내용</label>
+      <textarea name="contents" id="contents" rows="10" class="form-control" readonly>${board.contents}</textarea>
+    </div>
+    <a href="<%= request.getContextPath() %>/board/list"><button type="button" class="btn btn-primary">목록</button></a>
+    <a href="<%= request.getContextPath() %>/board/modify"><button type="button" class="btn btn-primary float-right">수정</button></a>
+    <a href="<%= request.getContextPath() %>/board/delete"><button type="button" class="btn btn-primary float-right">삭제</button></a>
   </div>
 </body>
 </html>
