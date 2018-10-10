@@ -8,6 +8,7 @@
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/global.css">
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Popper JS -->
@@ -20,8 +21,8 @@
 </head>
 <body>
     <div class="container">
-    <h2>Hoverable Dark Table</h2>
-    <p>The .table-hover class adds a hover effect (grey background color) on table rows:</p>           
+    <h1>게시판 목록</h1>
+    <p>게시글 목록입니다.</p>
     <table class="table table-dark table-hover">
       <thead>
         <tr>
@@ -35,7 +36,7 @@
         <c:forEach var="board" items="${list}">
           <tr>
             <td>${board.num}</td>
-            <td>${board.title}</td>
+            <td><a href="<%= request.getContextPath() %>/board/detail?num=${board.num}">${board.title}</a></td>
             <td>${board.author}</td>
             <td>${board.register_date}</td>
           </tr>
