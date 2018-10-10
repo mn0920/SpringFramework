@@ -13,7 +13,7 @@ public class AccountServiceImp implements AccountService {
 	AccountDao accountDao;
 
 	@Override
-	public boolean login(AccountVo accountVo) {
+	public boolean signin(AccountVo accountVo) {
 		String dbPw = accountDao.getPw(accountVo.getId());
 		if(dbPw == null || dbPw.compareTo(accountVo.getPw()) != 0)
 			return false;

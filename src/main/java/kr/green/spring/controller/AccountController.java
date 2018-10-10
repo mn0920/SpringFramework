@@ -30,12 +30,12 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homeGet() {
-		return "member/login";
+		return "member/signin";
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String homepost(AccountVo accountVo, Model model) {
-		boolean isLogin = accountService.login(accountVo);
+		boolean isLogin = accountService.signin(accountVo);
 		
 		if(!isLogin)
 			return "redirect:/";
@@ -56,12 +56,12 @@ public class AccountController {
 		return "redirect:/signup";
 	}
 	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
+	@RequestMapping(value="/signin", method = RequestMethod.GET)
 	public String loginGet() {
-		return "member/login";
+		return "member/signin";
 	}
 	
-	@RequestMapping(value="/login", method = RequestMethod.POST)
+	@RequestMapping(value="/signin", method = RequestMethod.POST)
 	public String loginPost(String id, String pw) {
 		System.out.println("id : " + id);
 		System.out.println("pw : " + pw);
