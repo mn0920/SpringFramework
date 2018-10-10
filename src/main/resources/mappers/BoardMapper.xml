@@ -12,4 +12,7 @@
     <select id="getBoard" resultType="kr.green.spring.vo.BoardVo">
         select * from board where num = #{num};
     </select>
+    <delete id="deleteBoard">
+        delete from board where num = #{num};
+    </delete>
 </mapper>

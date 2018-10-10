@@ -41,5 +41,11 @@ public class BoardController {
 			model.addAttribute("board", boardVo);
 			return "board/detail";
 	}
+
+	@RequestMapping(value="/board/delete", method=RequestMethod.GET)
+	public String boardDeleteGet(int num) {
+		boardService.deleteBoard(num);
+		return "redirect:/board/list";
+	}
 	
 }

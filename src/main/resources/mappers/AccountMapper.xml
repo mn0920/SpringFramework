@@ -9,7 +9,7 @@
   <select id="getPw" resultType="String">
     select pw from account where id = #{id}
   </select>
-    <insert id="setAccount">
+  <insert id="setAccount">
     insert into account(id, pw, email, gender) values(#{id}, #{pw}, #{email}, #{gender})
   </insert>
 </mapper>

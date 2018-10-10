@@ -18,7 +18,8 @@
 
 <body>
   <div class="container">
-  <h3>게시글</h3>
+    <h1>게시글 수정</h1>
+    <form method="POST">
     <div class="form-group">
       <label for="title">제목</label>
       <input type="text" name="title" id="title" class="form-control" readonly value="${board.title}">
@@ -35,9 +36,8 @@
       <label for="contents">내용</label>
       <textarea name="contents" id="contents" rows="10" class="form-control" readonly>${board.contents}</textarea>
     </div>
-    <a href="<%= request.getContextPath() %>/board/list"><button type="button" class="btn btn-primary">목록</button></a>
-    <a href="<%= request.getContextPath() %>/board/modify?num=${board.num}"><button type="button" class="btn btn-primary float-right">수정</button></a>
-    <a href="<%= request.getContextPath() %>/board/delete?num=${board.num}"><button type="button" class="btn btn-primary float-right">삭제</button></a>
-  </div>
+      <a href="<%= request.getContextPath() %>/board/list"><button type="button" class="btn btn-primary">취소</button></a>
+      <button type="submit" class="btn btn-primary float-right">등록</button>
+    </form>
 </body>
 </html>
