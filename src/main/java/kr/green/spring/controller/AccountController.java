@@ -35,11 +35,11 @@ public class AccountController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String homepost(AccountVo accountVo, Model model) {
-		boolean isSignin = accountService.signin(accountVo);
+		AccountVo user = accountService.signin(accountVo);
 		
-		if(!isSignin)
+		if(user == null)
 			return "redirect:/";
-		model.addAttribute("id", accountVo.getId());
+		model.addAttribute("user", user);
 		return "redirect:/board/list";
 	}
 	

@@ -12,4 +12,7 @@
   <insert id="setAccount">
     insert into account(id, pw, email, gender) values(#{id}, #{pw}, #{email}, #{gender})
   </insert>
+  <select id="getAccount" resultType="kr.green.spring.vo.AccountVo">
+   select * from account where id = #{id}
+  </select>
 </mapper>
