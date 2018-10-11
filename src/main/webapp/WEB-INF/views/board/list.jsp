@@ -22,7 +22,8 @@
 <body>
     <div class="container">
     <h1>게시판 목록</h1>
-    <p>게시글 목록입니다.</p>
+    <p>게시글 목록입니다.
+    <button type="button" class="btn btn-dark float-right"><a href="<%= request.getContextPath() %>/signout" id="signout">로그아웃</a></button></p>
     <table class="table table-dark table-hover">
       <thead>
         <tr>
