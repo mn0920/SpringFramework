@@ -29,7 +29,7 @@
       </div>
       <div class="form-group">
         <label for="author">작성자</label>
-        <input type="text" name="author" id="author" class="form-control" readonly>
+        <input type="text" name="author" id="author" class="form-control" readonly value="${author}">
       </div>
       <div class="form-group">
         <label for="contents">내용</label>

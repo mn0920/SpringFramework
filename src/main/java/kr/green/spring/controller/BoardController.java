@@ -2,6 +2,9 @@ package kr.green.spring.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.green.spring.service.BoardService;
+import kr.green.spring.vo.AccountVo;
 import kr.green.spring.vo.BoardVo;
 
 @Controller
@@ -25,12 +29,15 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/register", method=RequestMethod.GET)
-		public String boardRegisterGet() {
+		public String boardRegisterGet(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		AccountVo user = (AccountVo)session.getAttribute("user");
+		if(user != null)
+			model.addAttribute("author", user.getId());
 			return "board/register";
 	}
 	@RequestMapping(value="/board/register", method=RequestMethod.POST)
 	public String boardRegisterPost(BoardVo boardVo) {
-		boardVo.setAuthor("관리자");
 		boardService.registerBoard(boardVo);
 		return "redirect:/board/list";
 	}
