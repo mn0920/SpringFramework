@@ -9,4 +9,5 @@ public interface BoardDao {
 	public void registerBoard(BoardVo boardVo);
 	public BoardVo getBoard(int num);
 	public void deleteBoard(int num);
+	public void updateBoard(BoardVo boardVo);
 }

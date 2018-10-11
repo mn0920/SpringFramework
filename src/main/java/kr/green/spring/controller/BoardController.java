@@ -48,4 +48,21 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+	@RequestMapping(value="/board/modify", method=RequestMethod.GET)
+		public String boardModifyGet(Model model, Integer num) {
+		//정상 경로로 수정페이지에 접근한게 아니면
+			if(num == null) {
+				return "redirect:/board/list";
+			}
+			BoardVo boardVo = boardService.getBoard(num);
+			model.addAttribute("board", boardVo);
+			return "board/modify";
+	}
+	@RequestMapping(value="/board/modify", method=RequestMethod.POST)
+	public String boardModifyrPost(BoardVo boardVo) {
+		boardService.updateBoard(boardVo);
+		return "redirect:/board/list";
+	}
+	
+	
 }

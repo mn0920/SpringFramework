@@ -15,4 +15,7 @@
     <delete id="deleteBoard">
         delete from board where num = #{num};
     </delete>
+    <update id="updateBoard">
+        update board set title=#{title}, contents=#{contents} where num = #{num};
+    </update>
 </mapper>

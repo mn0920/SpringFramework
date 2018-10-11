@@ -1,5 +1,6 @@
 package kr.green.spring.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BoardVo {
@@ -42,8 +43,9 @@ public class BoardVo {
 	public void setFile(String file) {
 		this.file = file;
 	}
-	public Date getRegister_date() {
-		return register_date;
+	public String getRegister_date() { //월 : 대문자 MM , 시간-분 : 소문자 mm
+		SimpleDateFormat format = new SimpleDateFormat("yyyy년MM월dd일 hh:mm");
+		return format.format(register_date);
 	}
 	public void setRegister_date(Date register_date) {
 		this.register_date = register_date;

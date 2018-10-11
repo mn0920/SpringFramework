@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>detail</title>
+<title>modify</title>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/global.css">
@@ -22,7 +22,7 @@
     <form method="POST">
     <div class="form-group">
       <label for="title">제목</label>
-      <input type="text" name="title" id="title" class="form-control" readonly value="${board.title}">
+      <input type="text" name="title" id="title" class="form-control"  value="${board.title}">
     </div>
     <div class="form-group">
       <label for="author">작성자</label>
@@ -30,14 +30,14 @@
     </div>
     <div class="form-group">
       <label for="register_date">작성일자</label>
-      <input type="text" name="register_date" id="register_date" class="form-control" readonly value="${board.register_date}">
+      <input type="text" id="register_date" class="form-control" readonly value="${board.register_date}">
     </div>
     <div class="form-group">
       <label for="contents">내용</label>
-      <textarea name="contents" id="contents" rows="10" class="form-control" readonly>${board.contents}</textarea>
+      <textarea name="contents" id="contents" rows="10" class="form-control">${board.contents}</textarea>
     </div>
       <a href="<%= request.getContextPath() %>/board/list"><button type="button" class="btn btn-primary">취소</button></a>
-      <button type="submit" class="btn btn-primary float-right">등록</button>
+      <button type="submit" class="btn btn-primary float-right">수정</button>
     </form>
 </body>
 </html>
