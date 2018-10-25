@@ -36,7 +36,8 @@
       <label for="contents">내용</label>
       <textarea name="contents" id="contents" rows="10" class="form-control">${board.contents}</textarea>
     </div>
-      <a href="<%= request.getContextPath() %>/board/list"><button type="button" class="btn btn-primary">취소</button></a>
+      <input type="hidden" value="${page}" name="page">
+      <a href="<%= request.getContextPath() %>/board/list?page=${page}"><button type="button" class="btn btn-primary">취소</button></a>
       <button type="submit" class="btn btn-primary float-right">수정</button>
     </form>
 </body>

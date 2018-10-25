@@ -44,7 +44,7 @@
         <c:forEach var="board" items="${list}">
           <tr>
             <td>${board.num}</td>
-            <td><a href="<%= request.getContextPath() %>/board/detail?num=${board.num}">${board.title}</a></td>
+            <td><a href="<%= request.getContextPath() %>/board/detail?num=${board.num}&page=${pageMaker.criteria.page}">${board.title}</a></td>
             <td>${board.author}</td>
             <td>${board.register_date}</td>
           </tr>
@@ -57,7 +57,7 @@
         <!-- ul은 부트스트렙 예제를 가지고 와서 고정된 1,2,3을 foreach로 바꾼것이다. -->
           <li class="page-item <c:if test="${!(pageMaker.prev)}">disabled</c:if>">
           <!-- c:if를 사용해서 사용이 가능하게, 가능하지 못하게 한 것이다. -->
-            <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.startPage - 1}">Previous</a>
+            <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.startPage - 1}"><i class="fas fa-angle-left"></i></a>
           </li>
           <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="i">
             <li class="page-item <c:if test="${pageMaker.criteria.page == i}">active</c:if>">
@@ -65,7 +65,7 @@
             <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${i}">${i}</a></li>
           </c:forEach>
           <li class="page-item <c:if test="${!(pageMaker.next)}">disabled</c:if>">
-            <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.endPage + 1}">Next</a>
+            <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.endPage + 1}"><i class="fas fa-angle-right"></i></a>
           </li>
         </ul>
      </div>   
