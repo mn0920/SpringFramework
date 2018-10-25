@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.green.spring.interceptor.LoginInterceptor;
 import kr.green.spring.service.AccountService;
 import kr.green.spring.service.BoardService;
 import kr.green.spring.vo.AccountVo;

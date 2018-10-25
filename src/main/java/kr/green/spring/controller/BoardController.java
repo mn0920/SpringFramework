@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.green.spring.pagenation.Criteria;
+import kr.green.spring.pagenation.PageMaker;
 import kr.green.spring.service.BoardService;
 import kr.green.spring.vo.AccountVo;
 import kr.green.spring.vo.BoardVo;
@@ -21,12 +23,26 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping(value="/board/list", method = RequestMethod.GET)
-	public String boardGet(Model model) {
-		ArrayList list = null;
-		list = (ArrayList)boardService.getBoardLists();
-		model.addAttribute("list", list);
-		return "board/list";
-	}
+	   public String boardListGet(Model model, Integer page) {
+	      if(page ==null)
+	         page = 1;
+	      int totalCount = boardService.getCountBoardLists();
+	      Criteria cri = new Criteria();
+	      cri.setPage(page);
+	      
+	      PageMaker pageMaker = new PageMaker();
+	      pageMaker.setCriteria(cri);
+	      pageMaker.setDisplayPageNum(10);
+	      pageMaker.setTotalCount(totalCount);
+	      
+	      System.out.println(pageMaker);
+	      
+	      ArrayList list = null;
+	      list = (ArrayList)boardService.getBoardLists(cri);
+	      model.addAttribute("list", list);
+	      model.addAttribute("pageMaker", pageMaker);
+	      return "board/list";
+	   }
 	
 	@RequestMapping(value="/board/register", method=RequestMethod.GET)
 		public String boardRegisterGet(HttpServletRequest request, Model model) {

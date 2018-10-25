@@ -9,6 +9,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/global.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Popper JS -->
@@ -18,6 +19,12 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+#pagination{
+    display:table;
+    margin:0 auto;
+}
+</style>
 </head>
 <body>
     <div class="container">
@@ -44,6 +51,20 @@
         </c:forEach>
       </tbody>
     </table>
+    <div id="pagination">
+        <ul class="pagination" >
+          <li class="page-item <c:if test="${!(pageMaker.prev)}">disabled</c:if>">
+            <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.startPage - 1}">Previous</a>
+          </li>
+          <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="i">
+            <li class="page-item <c:if test="${pageMaker.criteria.page == i}">active</c:if>">
+            <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${i}">${i}</a></li>
+          </c:forEach>
+          <li class="page-item <c:if test="${!(pageMaker.next)}">disabled</c:if>">
+            <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.endPage + 1}">Next</a>
+          </li>
+        </ul>
+     </div>   
     <a href="<%= request.getContextPath() %>/board/register">
       <button class="btn btn-primary"> 등록 </button>
     </a>
