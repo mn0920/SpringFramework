@@ -28,12 +28,13 @@ public class BoardController {
 	         page = 1;
 	      int totalCount = boardService.getCountBoardLists();
 	      Criteria cri = new Criteria();
+	      //cri.setPerPageNum(10);//한 페이지당 보여줄 게시판의 수 - 없으면 10개씩 보여준다.
 	      cri.setPage(page);
-	      
+	      //위에 것들이 있어야 계산을 할 수 있다.
 	      PageMaker pageMaker = new PageMaker();
 	      pageMaker.setCriteria(cri);
 	      pageMaker.setDisplayPageNum(10);
-	      pageMaker.setTotalCount(totalCount);
+	      pageMaker.setTotalCount(totalCount);//제대로 됬는지 다 보기위해서 확인하기 위한 것이기때문에 주석처리 가능함.
 	      
 	      System.out.println(pageMaker);
 	      

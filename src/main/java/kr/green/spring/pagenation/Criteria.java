@@ -13,11 +13,11 @@ public class Criteria {
 		return page;
 	}
 	public void setPerPageNum(int perPageNum) {
-		/*	한페이지당 보여지는 게시글이 최소 5개
-		 *  이상이 되도록 설정 */
+		/*	한페이지당 보여지는 게시글이 최소 5개 이상이 되도록 설정 */
 		if(perPageNum <=4)
 			this.perPageNum = 5;
-		this.perPageNum = perPageNum;
+		else
+			this.perPageNum = perPageNum;
 	}
 	public void setPage(int page) {
 		/* 현재 페이지가 1페이지 이상이 되도록 설정*/
@@ -26,9 +26,7 @@ public class Criteria {
 		else
 			this.page = page;
 	}
-	/* 쿼리문에서 limit를 사용할 떄 가져올 컨텐츠의 시작 위치를
-	 * 계산 하는 메소드 xml에서 #{startPage}를 호출할때
-	 * getStartPage가 호출됨 */
+	/* 쿼리문에서 limit를 사용할 떄 가져올 컨텐츠의 시작 위치를 계산 하는 메소드 xml에서 #{startPage}를 호출할때 getStartPage가 호출됨 */
 	public int getStartPage() {
 		return (page-1)*perPageNum;
 	}

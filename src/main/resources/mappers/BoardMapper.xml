@@ -5,6 +5,7 @@
 <mapper namespace="kr.green.spring.dao.BoardDao">
     <select id="getBoardLists" resultType="kr.green.spring.vo.BoardVo">
         select * from board order by num DESC limit #{cri.startPage}, #{cri.perPageNum};
+        <!-- 전부다 가져오는 것이 아니라, limit로 제한을 걸어준 것이다. -->
     </select>
     <insert id="registerBoard">
         insert into board(title, contents, author, file) value(#{title}, #{contents},#{author},#{file});
@@ -20,5 +21,6 @@
     </update>
     <select id="getCountBoardLists" resultType="int">
         select count(num) from board;
+        <!-- 갯수를 알기위해 resultType이 int인 것 이다. -->
     </select>
 </mapper>
