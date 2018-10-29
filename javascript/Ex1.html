@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src=""></script>
+</head>
+<body>
+	<script>
+		/* 자바스크립에서는 변수의 자료형을 따로 지정하지 않는다.
+		 여기서는 따로 자료형을 쓸 필요가 없다. */
+		var num = 123;
+		/* 자바스크립트에서는 문자열을 ""또는 ''로 표현한다. */
+		var op = '+';
+		var isBoolean = true;
+		console.log(num);
+		console.log(op);
+		console.log(isBoolean);
+		console.log(typeof num);
+		console.log(typeof op);
+		console.log(typeof isBoolean);
+
+		/* 문자열 생성하는 다양한 예 */
+		var str1 = '문자열1';
+		var str2 = "문자열2";
+		var str3 = String("문자열");
+		var str4 = new String("문자열4");
+		var str5 = str4.valueOf();
+		console.log("--문자열 생성예제--");
+		console.log(typeof str1);		
+		console.log(typeof str2);			
+		console.log(typeof str3);			
+		console.log(typeof str4);			
+		console.log(typeof str5);			
+		console.log(str4);
+		/* 문자열 비교 */
+		console.log("A" > "B");
+		console.log("a" > "A");//소문자가 대문자보다 크다
+		console.log("Aa" > "A");//뒤에 있는게 없는 것 보다 크다
+		console.log("3" > "1");//문자열3과 문자열1을 비교
+		console.log(3>18);
+		console.log(3 > "18");//숫자3과 숫자 18을 비교
+	</script>
+</body>
+</html>
