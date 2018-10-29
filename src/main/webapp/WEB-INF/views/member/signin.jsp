@@ -34,6 +34,13 @@
         </div>
         </form>
     <a href="<%= request.getContextPath() %>/signup">회원가입</a>
+    <input type="hidden" value="${loginOk}" id="loginOk" />
     </div>
+    <script type="text/javascript">
+    var loginOk = document.getElementById('loginOk');
+    if(loginOk.value == 0){
+    	alert('아이디 또는 패스워드를 잘 못 입력했습니다.');
+    }
+    </script>
 </body>
 </html>
