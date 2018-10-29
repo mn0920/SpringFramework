@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<button onClick="openWindow()">클릭</button>
+	<button onClick="closeWindow()">닫기</button>
+	<button onClick="goBack()">뒤로</button>
+	<button onClick="goForward()">앞으로</button>
+	<button onClick="go()">-2</button>
+	<script>
+		/* 브라우저 객체 모뎅(BOM)
+		window(window라는 객체 안에는 이렇게 5가지의 모델이 있다.)
+			- document : html문서와 관련 (매우 중요하다)
+			- location : 위치
+			- history : 기록(뒤로가기나 앞으로 가기와 관련됨)
+			- screen : 현재화면 정보
+			- navigator : 안내
+		 */
+		/* window : 브라우저 창 하나당 하나의 객체가 생성 */
+		//alert("Hellow world")
+		var val = 1;
+		//alert(window.val);
+		var my;
+		function openWindow(){
+			my = window.open("http://127.0.0.1:5500/Ex5.html", "My", "width=300, height=500");
+		}
+		function closeWindow(){
+			if(my){
+				my.close();
+			}
+		}
+		function goBack(){
+			history.back();
+		}
+		function goForward(){
+			history.forward();
+		}
+		function go(num){
+			history.go(num)
+		}
+	</script>	
+</body>
+</html>
