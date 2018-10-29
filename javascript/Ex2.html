@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/* 자바스크립트에서는 1/0을 했을 때 에러가 생기지 않고 Infinity라는 무한대 값을 가진다. */
+		var num = 1/0;
+		console.log(num);
+		console.log(typeof num);
+		/* isFinity : num가 유한대이면 true를 무한대이면 false를 반환 */
+		console.log(isFinite(num));
+		/* 자바스크립트에서는 변수의 타입을 따로 지정하지 않기 떄문에 때로는 불편할 때가 있다.
+		   해당 변수가 number타입인지 아닌지 확인하는 함수를 이용한다.
+			 isNaN(num) : num의 타입이 number이면 false, 아니면 true(false이면 숫자가 맞다는 뜻)
+			 NaN = Not a Number의 약자 */
+		console.log(isNaN(num));
+		console.log(isNaN(NaN));
+		/* null: 의도적으로 비어있는 값으로 알림
+		undifined : 의도적인게 아님, 주로 변수 선언을 하고 값을 대입하지 않고 사용했을 때
+		=> 자바스크립트에서는 변수의 타입이 값을 대입할때 결정되는데 값이 없는 변수는 타입을 알수 없기 때문 */
+		var tmp;
+		console.log(typeof tmp);
+
+		/* 자바에서는 같은 타입들만 배열로 만들 수 있는데,
+		   - 자바스크립트에서는 다른 타입의 값들고 배열로 만들 수 있다.
+			 - 배열의 길이를 지정하지 않아도 된다.
+			 - 자바에서 값을 초기화할 때 {}안에 초기화를 하는데 자바스크립에서는 []안에 초기화한다. */
+		var arr = [123, "123", true];
+		var arr1 = new Array();
+		arr1[0] = "456";
+		var arr2 = new Array(3);
+		arr2[0] = 789;
+		var arr3 = new Array(123, "456", false);
+		console.log("배열예제");
+		console.log("arr : "+arr);
+		console.log("arr1 : "+arr1);
+		console.log("arr2 : "+arr2);
+		console.log("arr3 : "+arr3);
+		/**/
+		console.log("비교연산자 예제");
+		console.log(1=='1');
+		console.log(1==='1');
+	</script>
+</body>
+</html>
