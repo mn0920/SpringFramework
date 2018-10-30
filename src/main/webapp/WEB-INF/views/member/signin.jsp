@@ -41,6 +41,9 @@
     if(loginOk.value == 0){
     	alert('아이디 또는 패스워드를 잘 못 입력했습니다.');
     }
+    if(${signup} == 1){
+    	alert('회원가입에 성공했습니다.');
+    }
     </script>
 </body>
 </html>
