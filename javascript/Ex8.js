@@ -1,0 +1,11 @@
+$(document).ready(function(){
+	$('#searchBtn').click(function(){
+		$('#search').val('안녕하세요');
+	});
+	$('#search').focus(function(){
+		$(this).css('background-color','gray');
+	});
+	$('#search').blur(function(){
+		$(this).css('background-color','white');
+	});
+});

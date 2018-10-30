@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- 위의 소스는 무조건 스크립트 위에 있어야 인식이 된다. -->
+	<script src="Ex8.js"></script>
+	<!-- 의미 : Ex8.js에 있는 스크립트를 여기에 적용하겠다. -->
+	<!-- 
+		head태그에 script를 이용하여 js파일을 불러올때
+		: body태그에 내용이 구성되기전에 불러와진다.
+		=> 화면이 보여지기전에 js파일이 실행된다.
+		* 이경우에 body태그에 있는 id, name, class를 이용한 코드가 제대로 실행이 안되는 경우가 발생
+	-->
+	<title>Document</title>
+</head>
+<body>
+	<!-- <script src="Ex8.js"></script> -->
+	<!--
+		body태그에 script를 이용하여 js파일을 불러올 때
+		: body태그에 있는 내용이 구성되고 불러와진다.
+		=> 화면에 내용이 출력되고 js파일이 실행
+		* 용량이 크면 여기에 넣는게 좋다 왜냐하면 용량이 많으면 js파일을 불러오는데 시간이 좀 걸리기 때문이다.
+	-->
+	<input type="text" name="search" id="search">
+	<button id="searchBtn">클릭</button>
+</body>
+</html>
