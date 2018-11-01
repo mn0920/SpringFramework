@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<style>
+		#box1{
+			height: 300px;
+		}
+		.border-red{
+			border: 1px solid red;
+		}
+		.display-none{
+			display: none;
+		}
+	</style>
+	<script>
+		$(document).ready(function(){
+			$('#btn1').click(function(){
+				$('#box1').toggleClass('border-red');
+				var text = $('#btn1').text();
+				/* //방법 1
+				if(text=='테두리 제거')
+					$('#btn1').text('테두리 생성');
+				else
+					$('#btn1').text('테두리 제거'); */
+
+				//방법 2 : display-none class 생성, 각 문자열을 span태그로 감싸고, id할당
+				$('#cre').toggleClass('display-none');
+				$('#del').toggleClass('display-none');
+			});
+		});
+	</script>
+</head>
+<body>
+	<button id="btn1">
+		<span id="del">테두리 제거</span>
+		<span id="cre" class="display-none">테두리 생성</span>
+	</button>
+	<div id="box1" class="border-red">안녕하세요.</div>
+</body>
+</html>
