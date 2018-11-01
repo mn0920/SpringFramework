@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			//$('div').first().css('background-color','red');
+			$('div').eq(0).css('background-color','red'); /* 위와 똑같은 코드 */
+			// /$('div').last().css('background-color','blue');
+			$('div').eq(7).css('background-color','blue'); /* 위와 똑같은 코드 */
+			$('span').filter('.three').css('color','red');
+			$('span.four').css('color','red'); /* 위와 똑같은 코드 */
+			$('div').not(':eq(4)').css('font-weight','bold'); /* 이것의 시작은 0번지 부터 시작하기 떄문에 5번을 뺀 나머지 */
+		});
+	</script>
+	<style>
+		div{
+			box-sizing: border-box;
+			border:1px solid black;
+			display: inline-block;
+			width: 80px;
+			height: 80px;
+			/* padding: 32px 32px; */
+			position: relative;
+		}
+		.fixed{ /* 무조건 브라우저 오른쪽하단, 스크롤을 내려도 같이 따라오면서 오른쪽 하단에 있다. */
+			position: fixed;
+			bottom: 10px;
+			right: 10px; /* 화면 안 쪽으로 들어간다(양수) */
+		}
+		.absolute{ /* 첫 화면에서 브라우저 왼쪽하단, 스크롤을 내려도 같이 따라오지 않는다. */
+			position: absolute;
+			bottom: 0;
+			left: -50px; /* 화면 밖쪽으로 넘어간다.(음수) */
+		}
+		body{
+			height: 1000px;
+		}
+		div>span{
+			position: absolute;
+			left: 35px;
+			top: 30px;
+		}
+		div>*{
+			font-size: 14px;
+		}
+	</style>
+</head>
+<body>
+	<!-- span태그는 어떠한 글자에 내가 원하는 스타일을 적용하고 싶을때 사용한다. -->
+	<div><span class="one">1</span></div>
+	<div><span class="two">2</span></div>
+	<div><span class="three">3</span></div>
+	<div><span class="four">4</span></div>
+	<div><span class="five">5</span></div>
+	<div><span class="six">6</span></div>
+	<div class="fixed">fixed</div>
+	<div class="absolute">abs</div>
+</body>
+</html>
