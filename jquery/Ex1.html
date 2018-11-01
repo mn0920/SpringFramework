@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+/*
+    $(document).ready(): html에서 body에 구성된 내용들이 다 완료되면 실행을 하겠다.    
+*/
+$(document).ready(function(){
+    function pHide(){
+        $("p").hide(2000);
+    }
+    function pShow(){
+        $("p").show(2000);
+    }
+    $("#hide").click(function(){
+        $("p").hide(2000);
+    });
+    $("#show").click(function(){
+        $("p").show(2000);
+    });
+    $("#toggle").click(function(){
+        $("p").toggle(2000);
+    });
+});
+</script>
+</head>
+<body>
+
+<p>If you click on the "Hide" button, I will disappear.</p>
+
+<button id="hide">Hide</button>
+<button id="show">Show</button>
+<button id="toggle">toggle</button>
+
+</body>
+</html>
