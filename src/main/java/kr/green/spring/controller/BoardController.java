@@ -23,10 +23,13 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping(value="/board/list", method = RequestMethod.GET)
-	   public String boardListGet(Model model, Integer page) {
+	   public String boardListGet(Model model, Integer page, String search) {
+		  if(search == null) {
+			  search="";
+		  }
 	      if(page ==null)
 	         page = 1;
-	      int totalCount = boardService.getCountBoardLists();
+	      int totalCount = boardService.getCountBoardLists("%"+search+"%"); // 검색된 컨텐츠의 갯수를 갖고온다
 	      Criteria cri = new Criteria();
 	      //cri.setPerPageNum(10);//한 페이지당 보여줄 게시판의 수 - 없으면 10개씩 보여준다.
 	      cri.setPage(page);
@@ -39,7 +42,8 @@ public class BoardController {
 	      System.out.println(pageMaker);
 	      
 	      ArrayList list = null;
-	      list = (ArrayList)boardService.getBoardLists(cri);
+	      list = (ArrayList)boardService.getBoardLists(cri, "%"+search+"%");
+	      model.addAttribute("search", search);
 	      model.addAttribute("list", list);
 	      model.addAttribute("pageMaker", pageMaker);
 	      return "board/list";
@@ -60,12 +64,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/detail", method=RequestMethod.GET)
-		public String boardDetailGet(Model model, Integer num, Integer page) {
+		public String boardDetailGet(Model model, Integer num, Integer page, String search) {
 			if(num== null)
 				return "redirect:/board/list";
 			if(page == null)
 				page =1;
 			BoardVo boardVo = boardService.getBoard(num);
+			model.addAttribute("search", search);
 			model.addAttribute("board", boardVo);
 			model.addAttribute("page", page);
 			return "board/detail";
@@ -78,7 +83,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/modify", method=RequestMethod.GET)
-		public String boardModifyGet(Model model, Integer num, Integer page) {
+		public String boardModifyGet(Model model, Integer num, Integer page, String search) {
 		//정상 경로로 수정페이지에 접근한게 아니면
 			if(num == null) {
 				return "redirect:/board/list";
@@ -86,15 +91,17 @@ public class BoardController {
 			if(page == null)
 				page =1;
 			BoardVo boardVo = boardService.getBoard(num);
+			model.addAttribute("search", search);
 			model.addAttribute("board", boardVo);
 			model.addAttribute("page", page);
 			return "board/modify";
 	}
 	@RequestMapping(value="/board/modify", method=RequestMethod.POST)
-	public String boardModifyrPost(BoardVo boardVo, Integer page, Model model) {
+	public String boardModifyrPost(BoardVo boardVo, Integer page, Model model, String search) {
 		if(page == null)
 			page =1;
 		model.addAttribute("page", page);
+		model.addAttribute("search", search);
 		boardService.updateBoard(boardVo);
 		return "redirect:/board/list";
 	}
