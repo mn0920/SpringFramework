@@ -30,7 +30,7 @@ public class PageMaker {
 //		첫 블록이면 prev 버튼 감추기
 		prev = startPage == 1 ? false:true;
 //		마지막 블록이면 next 버튼 감추기
-		next = endPage*displayPageNum >= totalCount ? false:true;
+		next = endPage*criteria.getPerPageNum() >= totalCount ? false:true;
 	}
 
 

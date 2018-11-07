@@ -7,11 +7,11 @@ import kr.green.spring.pagenation.PageMaker;
 import kr.green.spring.vo.BoardVo;
 
 public interface BoardService {
-	public List<BoardVo> getBoardLists(Criteria cri, String search);
+	public List<BoardVo> getBoardLists(Criteria cri, String search, Integer type);
 	public void registerBoard(BoardVo boardVo);
 	public BoardVo getBoard(int num);
 	public void deleteBoard(int num);
 	public void updateBoard(BoardVo boardVo);
-	public int getCountBoardLists(String search);
-	public PageMaker getPageMaker(String search, Integer page, int perPageNum, int displayPageNum);
+	public int getCountBoardLists(String search, Integer type);
+	public PageMaker getPageMaker(String search, Integer page, int perPageNum, int displayPageNum, Integer type);
 }

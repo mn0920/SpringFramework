@@ -1,28 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet"
-  href="<%=request.getContextPath()%>/resources/css/global.css">
-<link rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-  integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-  crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/global.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 <!-- jQuery library -->
-<script
-  src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Popper JS -->
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
-<script
-  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -47,14 +39,14 @@
       <div class="input-group-append" style="width:100%">
         <div class="input-group mb-3" style="width:20%">
           <label for="sel1"></label>
-          <select class="form-control" id="sel1">
-            <option name="title" selected>제목</option>
-            <option name="autor">글쓴이</option>
-            <option name="contents">내용</option>
-            <option name="TC">제목+내용</option>
+          <select class="form-control" name="type">
+            <option value="0" <c:if test="${type == 0 || type == null}">selected</c:if>>제목</option>
+            <option value=1 <c:if test="${type == 1}">selected</c:if>>작성자</option>
+            <option value=2 <c:if test="${type == 2}">selected</c:if>>내용</option>
+            <option value=3 <c:if test="${type == 3}">selected</c:if>>제목+내용</option>
           </select>
           </div>
-          <input type="text" class="form-control" placeholder="Search" name="search">
+          <input type="text" class="form-control" placeholder="Search" name="search" value="${search}">
           <button class="btn btn-success" type="submit">검색</button>
       </div>
     </form>

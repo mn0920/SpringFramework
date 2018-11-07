@@ -23,29 +23,15 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping(value="/board/list", method = RequestMethod.GET)
-	   public String boardListGet(Model model, Integer page, String search) {
-		  if(search == null) {
-			  search="";
-		  }
-	      if(page ==null)
-	         page = 1;
-	      int totalCount = boardService.getCountBoardLists("%"+search+"%"); // 검색된 컨텐츠의 갯수를 갖고온다
-	      Criteria cri = new Criteria();
-	      //cri.setPerPageNum(10);//한 페이지당 보여줄 게시판의 수 - 없으면 10개씩 보여준다.
-	      cri.setPage(page);
-	      //위에 것들이 있어야 계산을 할 수 있다.
-	      PageMaker pageMaker = new PageMaker();
-	      pageMaker.setCriteria(cri);
-	      pageMaker.setDisplayPageNum(10);
-	      pageMaker.setTotalCount(totalCount);//제대로 됬는지 다 보기위해서 확인하기 위한 것이기때문에 주석처리 가능함.
-	      
-	      System.out.println(pageMaker);
+	   public String boardListGet(Model model, Integer page, String search, Integer type) {
+		  PageMaker pageMaker = boardService.getPageMaker(search, page, 5, 10, type);
 	      
 	      ArrayList list = null;
-	      list = (ArrayList)boardService.getBoardLists(cri, "%"+search+"%");
+	      list = (ArrayList)boardService.getBoardLists(pageMaker.getCriteria(), search, type);
 	      model.addAttribute("search", search);
 	      model.addAttribute("list", list);
 	      model.addAttribute("pageMaker", pageMaker);
+	      model.addAttribute("type", type);
 	      return "board/list";
 	   }
 	
