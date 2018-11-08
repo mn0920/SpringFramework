@@ -50,7 +50,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/detail", method=RequestMethod.GET)
-		public String boardDetailGet(Model model, Integer num, Integer page, String search) {
+		public String boardDetailGet(Model model, Integer num, Integer page, String search, Integer type) {
 			if(num== null)
 				return "redirect:/board/list";
 			if(page == null)
@@ -59,6 +59,7 @@ public class BoardController {
 			model.addAttribute("search", search);
 			model.addAttribute("board", boardVo);
 			model.addAttribute("page", page);
+			model.addAttribute("type", type);
 			return "board/detail";
 	}
 
