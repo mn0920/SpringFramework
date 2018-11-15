@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.spring.dao.BoardDao">
-    <select id="getBoardListsByTitle" resultType="kr.green.spring.vo.BoardVo">
+<!--     <select id="getBoardListsByTitle" resultType="kr.green.spring.vo.BoardVo">
         select * from board where title like #{search} order by num DESC limit #{cri.startPage}, #{cri.perPageNum};
-        <!-- 전부다 가져오는 것이 아니라, limit로 제한을 걸어준 것이다. -->
+        전부다 가져오는 것이 아니라, limit로 제한을 걸어준 것이다.
     </select>
     <select id="getBoardListsByAuthor" resultType="kr.green.spring.vo.BoardVo">
         select * from board where author like #{search} order by num DESC limit #{cri.startPage}, #{cri.perPageNum};
@@ -15,7 +15,24 @@
     </select>
     <select id="getBoardListsByTitleAndContents" resultType="kr.green.spring.vo.BoardVo">
         select * from board where contents like #{search} or title like #{search} order by num DESC limit #{cri.startPage}, #{cri.perPageNum};
+    </select> -->
+     <select id="getBoardLists" resultType="kr.green.spring.vo.BoardVo">
+        select * from board 
+        <if test="cri.type == 0">
+            where title like CONCAT('%',#{cri.search},'%')  
+        </if> 
+        <if test="cri.type == 1">
+              where author like CONCAT('%',#{cri.search},'%')  
+        </if> 
+        <if test="cri.type == 2">
+              where contents like CONCAT('%',#{cri.search},'%')  
+        </if> 
+        <if test="cri.type == 3">
+              where contents like CONCAT('%',#{cri.search},'%')  or title like CONCAT('%',#{cri.search},'%')  
+        </if>
+        order by num DESC limit #{cri.startPage}, #{cri.perPageNum};
     </select>
+    
     <insert id="registerBoard">
         insert into board(title, contents, author, file) value(#{boardVo.title}, #{boardVo.contents},#{boardVo.author},#{boardVo.file});
     </insert>
@@ -28,9 +45,9 @@
     <update id="updateBoard">
         update board set title=#{boardVo.title}, contents=#{boardVo.contents} where num = #{boardVo.num};
     </update>
-    <select id="getCountBoardListsByTitle" resultType="int">
+<!--     <select id="getCountBoardListsByTitle" resultType="int">
         select count(num) from board where title like #{search};
-        <!-- 갯수를 알기위해 resultType이 int인 것 이다. -->
+        갯수를 알기위해 resultType이 int인 것 이다.
     </select>
     <select id="getCountBoardListsByAuthor" resultType="int">
         select count(num) from board where author like #{search};
@@ -40,5 +57,20 @@
     </select>
     <select id="getCountBoardListsByTitleAndContents" resultType="int">
         select count(num) from board where contents like #{search} or title like #{search};
+    </select> -->
+    <select id="getCountBoardLists" resultType="int">
+        select count(num) from board
+         <if test="cri.type == 0">
+            where title like CONCAT('%',#{cri.search},'%') 
+        </if> 
+        <if test="cri.type == 1">
+              where author like CONCAT('%',#{cri.search},'%') 
+        </if> 
+        <if test="cri.type == 2">
+              where contents like CONCAT('%',#{cri.search},'%') 
+        </if> 
+        <if test="cri.type == 3">
+              where contents like CONCAT('%',#{cri.search},'%') or title like concat('%',#{cri.search},'%') 
+        </if>
     </select>
 </mapper>

@@ -23,15 +23,14 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping(value="/board/list", method = RequestMethod.GET)
-	   public String boardListGet(Model model, Integer page, String search, Integer type) {
-		  PageMaker pageMaker = boardService.getPageMaker(search, page, 5, 10, type);
+	   public String boardListGet(Model model, Criteria cri) {
+		  PageMaker pageMaker = boardService.getPageMaker(cri, 10);
 	      
 	      ArrayList list = null;
-	      list = (ArrayList)boardService.getBoardLists(pageMaker.getCriteria(), search, type);
-	      model.addAttribute("search", search);
+	      list = (ArrayList)boardService.getBoardLists(cri);
+	      
 	      model.addAttribute("list", list);
 	      model.addAttribute("pageMaker", pageMaker);
-	      model.addAttribute("type", type);
 	      return "board/list";
 	   }
 	
@@ -50,16 +49,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/detail", method=RequestMethod.GET)
-		public String boardDetailGet(Model model, Integer num, Integer page, String search, Integer type) {
+		public String boardDetailGet(Model model, Integer num, Criteria cri) {
 			if(num== null)
 				return "redirect:/board/list";
-			if(page == null)
-				page =1;
 			BoardVo boardVo = boardService.getBoard(num);
-			model.addAttribute("search", search);
 			model.addAttribute("board", boardVo);
-			model.addAttribute("page", page);
-			model.addAttribute("type", type);
+			model.addAttribute("cri", cri);
 			return "board/detail";
 	}
 

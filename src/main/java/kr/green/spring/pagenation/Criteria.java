@@ -5,6 +5,8 @@ public class Criteria {
 	private int perPageNum;
 //	현재 페이지
 	private int page;
+	private String search;
+	private Integer type;
 	
 	public int getPerPageNum() {
 		return perPageNum;
@@ -18,6 +20,18 @@ public class Criteria {
 			this.perPageNum = 5;
 		else
 			this.perPageNum = perPageNum;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	public void setPage(int page) {
 		/* 현재 페이지가 1페이지 이상이 되도록 설정*/
@@ -33,5 +47,11 @@ public class Criteria {
 	public Criteria() {
 		page = 1;
 		perPageNum = 10;
+		search = "";
+		type = 0;
+	}
+	@Override
+	public String toString() {
+		return "Criteria [perPageNum=" + perPageNum + ", page=" + page + ", search=" + search + ", type=" + type + "]";
 	}
 }

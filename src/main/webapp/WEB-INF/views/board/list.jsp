@@ -26,6 +26,7 @@
 </style>
 </head>
 <body>
+<br><br>
   <div class="container">
     <h1>게시판 목록</h1>
     <p>
@@ -37,16 +38,16 @@
     <!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="display:block;"> -->
     <form method="GET">
       <div class="input-group-append" style="width:100%">
-        <div class="input-group mb-3" style="width:20%">
+        <div class="input-group mb-3" style="width:20%" style="margin-bottom:0;">
           <label for="sel1"></label>
           <select class="form-control" name="type">
-            <option value="0" <c:if test="${type == 0 || type == null}">selected</c:if>>제목</option>
-            <option value=1 <c:if test="${type == 1}">selected</c:if>>작성자</option>
-            <option value=2 <c:if test="${type == 2}">selected</c:if>>내용</option>
-            <option value=3 <c:if test="${type == 3}">selected</c:if>>제목+내용</option>
+            <option value="0" <c:if test="${pageMaker.criteria.type == 0}">selected</c:if>>제목</option>
+            <option value=1 <c:if test="${pageMaker.criteria.type == 1}">selected</c:if>>작성자</option>
+            <option value=2 <c:if test="${pageMaker.criteria.type == 2}">selected</c:if>>내용</option>
+            <option value=3 <c:if test="${pageMaker.criteria.type == 3}">selected</c:if>>제목+내용</option>
           </select>
           </div>
-          <input type="text" class="form-control" placeholder="Search" name="search" value="${search}">
+          <input type="text" class="form-control" placeholder="Search" name="search" value="${pageMaker.criteria.search}">
           <button class="btn btn-success" type="submit">검색</button>
       </div>
     </form>
@@ -63,7 +64,7 @@
         <c:forEach var="board" items="${list}">
           <tr>
             <td>${board.num}</td>
-            <td><a href="<%= request.getContextPath() %>/board/detail?num=${board.num}&page=${pageMaker.criteria.page}&search=${search}&type=${type}">${board.title}</a></td>
+            <td><a href="<%= request.getContextPath() %>/board/detail?num=${board.num}&page=${pageMaker.criteria.page}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}">${board.title}</a></td>
             <td>${board.author}</td>
             <td>${board.register_date}</td>
           </tr>
@@ -76,16 +77,16 @@
         <!-- ul은 부트스트렙 예제를 가지고 와서 고정된 1,2,3을 foreach로 바꾼것이다. -->
         <li class="page-item <c:if test="${!(pageMaker.prev)}">disabled</c:if>">
           <!-- c:if를 사용해서 사용이 가능하게, 가능하지 못하게 한 것이다. -->
-          <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.startPage - 1}&search=${search}&type=${type}"><i class="fas fa-angle-left"></i></a>
+          <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.startPage - 1}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}"><i class="fas fa-angle-left"></i></a>
         </li>
         <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="i">
           <li class="page-item <c:if test="${pageMaker.criteria.page == i}">active</c:if>">
             <!-- c:if문을 사용해서 현재 페이지에 색이 나오게 했다. -->
-            <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${i}&search=${search}&type=${type}">${i}</a>
+            <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${i}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}">${i}</a>
           </li>
         </c:forEach>
         <li class="page-item <c:if test="${!(pageMaker.next)}">disabled</c:if>">
-          <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.endPage + 1}&search=${search}&type=${type}"><i class="fas fa-angle-right"></i></a>
+          <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.endPage + 1}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}"><i class="fas fa-angle-right"></i></a>
         </li>
       </ul>
     </div>
@@ -93,5 +94,6 @@
       <button class="btn btn-primary">등록</button>
     </a>
   </div>
+<br><br>
 </body>
 </html>
