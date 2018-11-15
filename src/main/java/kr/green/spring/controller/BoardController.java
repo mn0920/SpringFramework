@@ -62,10 +62,11 @@ public class BoardController {
 	}
 	@RequestMapping(value="/board/register", method=RequestMethod.POST)
 	public String boardRegisterPost(BoardVo boardVo, MultipartFile files) throws IOException, Exception {
-		System.out.println(files);
 		//uploadFile(files.getOriginalFilename(),files.getBytes());
-		String filepath = UploadFileUtils.uploadFile(uploadPath, files.getOriginalFilename(), files.getBytes());
-		boardVo.setFile(filepath);
+		if(files.getOriginalFilename() != null && files.getOriginalFilename().length() != 0) {
+			String filepath = UploadFileUtils.uploadFile(uploadPath, files.getOriginalFilename(), files.getBytes());
+			boardVo.setFile(filepath);
+		}
 		boardService.registerBoard(boardVo);
 		return "redirect:/board/list";
 	}
@@ -118,10 +119,14 @@ public class BoardController {
 	}
 	@RequestMapping(value="/board/modify", method=RequestMethod.POST)
 	public String boardModifyrPost(BoardVo boardVo, Model model, MultipartFile files) throws IOException, Exception {
-		String file; 
-		if(files != null) {
+		String file;
+		BoardVo tmp = boardService.getBoard(boardVo.getNum());
+		if(files.getOriginalFilename() != null && files.getOriginalFilename().length() != 0) {
 			file = UploadFileUtils.uploadFile(uploadPath, files.getOriginalFilename(), files.getBytes());
 			boardVo.setFile(file);
+		} else {
+			// 이전 첨부파일 경로 : 만약 수정을 했을때, 첨부파일을 수정 안 한다면 전에 있던것을 가지고 오라는 뜻임
+			boardVo.setFile(tmp.getFile());
 		}
 		boardService.updateBoard(boardVo);
 		return "redirect:/board/list";
