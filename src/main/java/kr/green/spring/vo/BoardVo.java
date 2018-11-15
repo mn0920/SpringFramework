@@ -38,7 +38,15 @@ public class BoardVo {
 		this.author = author;
 	}
 	public String getFile() {
+		/*/년/월/일/파일명.확장자가 나오는 getter*/
 		return file;
+	}
+	public String getOriFile() {
+		/*파일명.확장자가 나오는 getter*/
+		if(file == null) {
+			return "";
+		}
+		return file.substring(file.indexOf/*문자열 또는 문자가 */('_')/*일 때*/+1/*그 다음 것 부터 저장하겠다.*/);
 	}
 	public void setFile(String file) {
 		this.file = file;

@@ -21,7 +21,7 @@
 <body>
   <div class="container">
     <h1>게시판 등록</h1>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label for="title">제목</label>
         <input type="text" name="title" id="title" class="form-control">
@@ -29,6 +29,11 @@
       <div class="form-group">
         <label for="author">작성자</label>
         <input type="text" name="author" id="author" class="form-control" readonly value="${author}">
+      </div>
+      <!-- 파일 업로드창 추가 -->
+      <div class="form-group">
+          <label>파일</label>
+          <input type="file" class="form-control" name="files"/>
       </div>
       <div class="form-group">
         <label for="contents">내용</label>

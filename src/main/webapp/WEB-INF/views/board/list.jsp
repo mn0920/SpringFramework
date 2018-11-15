@@ -37,9 +37,8 @@
     </p>
     <!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="display:block;"> -->
     <form method="GET">
-      <div class="input-group-append" style="width:100%">
-        <div class="input-group mb-3" style="width:20%" style="margin-bottom:0;">
-          <label for="sel1"></label>
+      <div class="input-group mt-3 mb-3">
+        <div class="form-group" style="margin:0";>
           <select class="form-control" name="type">
             <option value="0" <c:if test="${pageMaker.criteria.type == 0}">selected</c:if>>제목</option>
             <option value=1 <c:if test="${pageMaker.criteria.type == 1}">selected</c:if>>작성자</option>

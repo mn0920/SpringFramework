@@ -43,7 +43,7 @@
         delete from board where num = #{num};
     </delete>
     <update id="updateBoard">
-        update board set title=#{boardVo.title}, contents=#{boardVo.contents} where num = #{boardVo.num};
+        update board set title=#{boardVo.title}, contents=#{boardVo.contents}, file = #{boardVo.file} where num = #{boardVo.num};
     </update>
 <!--     <select id="getCountBoardListsByTitle" resultType="int">
         select count(num) from board where title like #{search};

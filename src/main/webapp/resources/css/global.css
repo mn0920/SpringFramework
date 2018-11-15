@@ -10,9 +10,13 @@ textarea.form-control[readonly]{
 a{
  color: white;
 }
-/* a#signout{
+ a.black{
  color: black;
-} */
+}
+ a.black:hover{
+   color: black;
+   text-decoration: underline;
+}  
 a:hover{
   color: white;
   font-weight: bold;

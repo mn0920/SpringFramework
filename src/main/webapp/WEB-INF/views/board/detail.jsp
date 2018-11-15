@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,6 +27,15 @@
       <label for="author">작성자</label>
       <input type="text" name="author" id="author" class="form-control" readonly value="${board.author}">
     </div>
+    <div class="form-group">
+      <label for="author">첨부파일</label>
+      <div>
+        <c:if test="${board.file != null}">
+        <a href ="<%= request.getContextPath() %>/board/download?fileName=${board.file}" class="black">${board.oriFile}</a>
+        </c:if>
+        <c:if test="${board.file == null}">없음</c:if>
+      </div>
+      </div>
     <div class="form-group">
       <label for="register_date">작성일자</label>
       <input type="text" name="register_date" id="register_date" class="form-control" readonly value="${board.register_date}">
