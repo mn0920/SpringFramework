@@ -15,4 +15,17 @@
   <select id="getAccount" resultType="kr.green.spring.vo.AccountVo">
    select * from account where id = #{id}
   </select>
+<!--   <select id="getAccounts" resultType="kr.green.spring.vo.AccountVo">
+   select * from account
+  </select> -->
+  <update id="setAuthor">
+      update account set author=#{author} where id = #{id};
+  </update>
+  <select id="getAccountLists" resultType="kr.green.spring.vo.AccountVo">
+      select * from account where id != #{id} and author != 'super admin' order by id asc limit #{cri.startPage}, #{cri.perPageNum};
+  </select>
+  <select id="getTotalCount" resultType="int">
+      select count(id) from account where not(id = #{id}) and not (author = 'super admin');
+  </select>
+
 </mapper>
