@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.green.spring.pagenation.Criteria;
 import kr.green.spring.pagenation.PageMaker;
+import kr.green.spring.service.AccountService;
 import kr.green.spring.service.BoardService;
 import kr.green.spring.utils.UploadFileUtils;
 import kr.green.spring.vo.AccountVo;
@@ -37,18 +38,22 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	/* bean에 등록된 Resource 중에서 id가 uploadPath를 가져옴*/
+	@Autowired
+	private AccountService accountService;
 	@Resource
 	private String uploadPath;
 	
 	@RequestMapping(value="/board/list", method = RequestMethod.GET)
-	   public String boardListGet(Model model, Criteria cri) {
+	   public String boardListGet(HttpServletRequest request, Model model, Criteria cri) {
+		  AccountVo user = accountService.getLoginUser(request);
 		  PageMaker pageMaker = boardService.getPageMaker(cri, 10);
-	      
+		  
 	      ArrayList list = null;
 	      list = (ArrayList)boardService.getBoardLists(cri);
 	      
 	      model.addAttribute("list", list);
 	      model.addAttribute("pageMaker", pageMaker);
+	      model.addAttribute("user", user);
 	      return "board/list";
 	   }
 	
@@ -60,6 +65,7 @@ public class BoardController {
 			model.addAttribute("author", user.getId());
 			return "board/register";
 	}
+	
 	@RequestMapping(value="/board/register", method=RequestMethod.POST)
 	public String boardRegisterPost(BoardVo boardVo, MultipartFile files) throws IOException, Exception {
 		//uploadFile(files.getOriginalFilename(),files.getBytes());

@@ -56,16 +56,24 @@ a{
     background-color: whitesmoke;
 }
 .contents{
- width : calc(100% - 200px);
+ width : calc(100%);
  }
  .container-table{
  width : 860px;
  margin : 40px auto 0;
  }
- .navbar,
- .container-fluid{
- min-width:1060px; /* 화면의 최소값을 쥐어줘야 삐져나오지 않는다.(%로 하면 말이 달라지지만) */
+ .navbar{
+ min-width:860px; /* 화면의 최소값을 쥐어줘야 삐져나오지 않는다.(%로 하면 말이 달라지지만) */
  }
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+.contents{
+margin:auto;
+}
+.page-active .page-link{
+    
+}
 </style>
 
 </head>
@@ -76,76 +84,70 @@ a{
     <!-- Brand/logo -->
     <a class="navbar-brand" href="#">Logo</a>
     <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> 관리자 페이지 </a>
+        <div class="dropdown-menu">
+          <c:if test="${user.author.equals('super admin')}">
+            <a class="dropdown-item" href="<%=request.getContextPath()%>/admin/cms/user">회원관리</a>
+          </c:if>
+          <a class="dropdown-item" href="<%=request.getContextPath()%>/admin/cms/board">게시물관리</a>
+        </div>
+       </li>
       <li class="nav-item active"><a class="nav-link" href="<%=request.getContextPath()%>/board/list">게시판</a></li>
+      <li class="nav-item active"><a class="nav-link" href="<%=request.getContextPath()%>/board/list" id="signout">로그아웃</a></li>
     </ul>
-    <button type="button" class="btn btn-dark float-right">
-      <a href="<%=request.getContextPath()%>/board/list" id="signout">로그아웃</a>
-    </button>
     </nav>
-    
-   <div class="container-fluid">
-      <div class="row">
-         <!-- left box -->
-         <div class="sub-menu">
-            <ul>
-                <li>
-                    <a href="<%=request.getContextPath() %>/admin/cms/user">회원 관리</a>
+   <!-- right box -->
+   <div class="row">
+   <div class="contents">
+    <form method="POST">
+      <div class="container-table">
+        <table class="table table-bordered" width="860px">
+          <thead>
+            <tr>
+              <th width="80px"><input type="checkbox"  id="checkall"> 선택</th>
+              <th width="80px">번호</th>
+              <th width="400px">제목</th>
+              <th width="110px">작성자</th>
+              <th width="190px">작성일</th>
+            </tr>
+          </thead>
+          <tbody>
+          
+          <c:forEach var="bbs" items="${list}">
+            <tr>
+              <td><input type="checkbox" value="${bbs.num}" name="checkList"></td><!--  체크박스에 값을 넣어준다 -->
+              <td>${bbs.num}</td>
+              <td>${bbs.title}</td>
+              <td>${bbs.author}</td>
+              <td>${bbs.register_date}</td>
+            </tr>
+          </c:forEach>
+          </tbody>
+        </table>
+          <div id="pagination">
+            <ul class="pagination justify-content-center">
+              <li class="page-item <c:if test="${!(pageMaker.prev)}">disabled</c:if>">
+                <a class="page-link" href="<%=request.getContextPath()%>/admin/cms/board?page=${pageMaker.startPage - 1}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}"><i class="fas fa-angle-left"></i></a>
+              </li>
+              <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="i">
+                <li class="page-item <c:if test="${pageMaker.criteria.page == i}">active</c:if>">
+                  <a class="page-link" href="<%=request.getContextPath()%>/admin/cms/board?page=${i}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}">${i}</a>
                 </li>
-                <li class="select">
-                    <a href="<%=request.getContextPath() %>/admin/cms/board">게시판 관리</a>
+              </c:forEach>
+              <li class="page-item <c:if test="${!(pageMaker.next)}">disabled</c:if>">
+                <a class="page-link" href="<%=request.getContextPath()%>/admin/cms/board?page=${pageMaker.endPage + 1}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}"><i class="fas fa-angle-right"></i></a>
                 </li>
-            </ul>       
+              </ul>
+            </div>
+            <button type="submit" class="btn btn-outline-dark">삭제</button>
+            <button type="button" class="btn btn-outline-dark"  id="allCheck">전체 선택</button>
          </div>
-         <!-- right box -->
-         <div class="contents">
-          <form method="POST">
-            <div class="container-table">
-              <table class="table table-bordered" width="860px">
-                <thead>
-                  <tr>
-                    <th width="80px"><input type="checkbox"  id="checkall"> 선택</th>
-                    <th width="80px">번호</th>
-                    <th width="400px">제목</th>
-                    <th width="110px">작성자</th>
-                    <th width="190px">작성일</th>
-                  </tr>
-                </thead>
-                <tbody>
-                
-                <c:forEach var="bbs" items="${list}">
-                  <tr>
-                    <td><input type="checkbox" value="${bbs.num}" name="checkList"></td><!--  체크박스에 값을 넣어준다 -->
-                    <td>${bbs.num}</td>
-                    <td>${bbs.title}</td>
-                    <td>${bbs.author}</td>
-                    <td>${bbs.register_date}</td>
-                  </tr>
-                </c:forEach>
-                </tbody>
-              </table>
-                <div id="pagination">
-                  <ul class="pagination">
-                    <li class="page-item <c:if test="${!(pageMaker.prev)}">disabled</c:if>">
-                      <a class="page-link" href="<%=request.getContextPath()%>/admin/cms/board?page=${pageMaker.startPage - 1}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}"><i class="fas fa-angle-left"></i></a>
-                    </li>
-                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="i">
-                      <li class="page-item <c:if test="${pageMaker.criteria.page == i}">active</c:if>">
-                        <a class="page-link" href="<%=request.getContextPath()%>/admin/cms/board?page=${i}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}">${i}</a>
-                      </li>
-                    </c:forEach>
-                    <li class="page-item <c:if test="${!(pageMaker.next)}">disabled</c:if>">
-                      <a class="page-link" href="<%=request.getContextPath()%>/admin/cms/board?page=${pageMaker.endPage + 1}&search=${pageMaker.criteria.search}&type=${pageMaker.criteria.type}"><i class="fas fa-angle-right"></i></a>
-                    </li>
-                  </ul>
-                </div>
-                <button type="submit" class="btn btn-outline-dark">삭제</button>
-                <button type="button" class="btn btn-outline-dark"  id="allCheck">전체 선택</button>
-             </div>
-            </form>
-          </div>
-         </div>
+        </form>
       </div>
-   </div>
+     </div>
+  </div>
+</div>
    <script type="text/javascript">
 /* 	    //jQurey //최상단 체크박스 클릭
 	    $("#checkall").click(function(){

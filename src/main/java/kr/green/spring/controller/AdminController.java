@@ -37,7 +37,7 @@ public class AdminController {
 	      return "admin/userManagement";
 	   }
 	
-	@RequestMapping(value="cms/user/modify")
+	@RequestMapping(value="/cms/user/modify")
 	public String cmsUserModify(HttpServletRequest request, Model model, String id, String author) {
 		accountService.setAuthor(request, id, author);
 		return "redirect:/admin/cms/user";

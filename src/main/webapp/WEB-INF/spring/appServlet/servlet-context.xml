@@ -25,6 +25,8 @@
 	<beans:bean id="loginInterceptor" class="kr.green.spring.interceptor.LoginInterceptor"></beans:bean>
     <beans:bean id="authorityInterceptor" class="kr.green.spring.interceptor.AuthorityInterceptor"></beans:bean>
     <beans:bean id="unauthorityInterceptor" class="kr.green.spring.interceptor.UnauthorityInterceptor"></beans:bean>
+    <beans:bean id="superAdminInterceptor" class="kr.green.spring.interceptor.SuperAdminInterceptor"></beans:bean>
+    <beans:bean id="adminInterceptor" class="kr.green.spring.interceptor.AdminInterceptor"></beans:bean>
 	<interceptors>
         <interceptor>
             <mapping path="/"/>
@@ -37,9 +39,18 @@
             <beans:ref bean="authorityInterceptor"/>
         </interceptor>
         <interceptor>
+            <mapping path="/"/>
             <mapping path="/signin"/>
             <mapping path="/signup"/>
             <beans:ref bean="unauthorityInterceptor"/>
+        </interceptor>
+         <interceptor>
+            <mapping path="/admin/cms/user*"/>
+            <beans:ref bean="superAdminInterceptor"/>
+        </interceptor>
+         <interceptor>
+            <mapping path="/admin/cms/board*"/>
+            <beans:ref bean="adminInterceptor"/>
         </interceptor>
     </interceptors>
     <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
