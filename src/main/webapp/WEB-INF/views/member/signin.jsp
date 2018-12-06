@@ -34,6 +34,7 @@
         </div>
         </form>
     <a href="<%= request.getContextPath() %>/signup">회원가입</a>
+    <a href="<%= request.getContextPath() %>/find/password">비밀번호 찾기</a>
     <input type="hidden" value="${loginOk}" id="loginOk" />
     </div>
     <script type="text/javascript">

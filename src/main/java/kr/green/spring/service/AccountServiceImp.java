@@ -82,4 +82,32 @@ public class AccountServiceImp implements AccountService {
 		AccountVo loginUser = (AccountVo) session.getAttribute("user");
 		return loginUser;
 	}
+
+  @Override
+  public boolean isDuplicated(String id) {
+    int cnt = accountDao.getUserCount(id);
+    if(cnt == 0)
+      return false;
+    else
+      return true;
+  }
+
+  @Override
+  public boolean checkAccount(String id, String email) {
+    AccountVo user = accountDao.getAccount(id);
+    if(user != null && user.getEmail().equals(email))
+      return true;
+    else
+      return false;
+    //. 으로 연달아서 사용하는 것을 체이닝기법이라고 한다.
+  }
+
+  @Override
+  public void updatePw(String id, String pw) {
+    AccountVo user = accountDao.getAccount(id);
+    String encPw = passwordEncoder.encode(pw);
+    user.setPw(encPw);
+    accountDao.modifyAccount(user);
+  }
+
 }

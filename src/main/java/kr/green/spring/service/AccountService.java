@@ -16,4 +16,7 @@ public interface AccountService {
 	public void setAuthor(HttpServletRequest request, String id, String author);
 	public PageMaker getPageMaker(HttpServletRequest request, Criteria cri, int displayPageNum);
 	public AccountVo getLoginUser(HttpServletRequest request);
+  public boolean isDuplicated(String id);
+  public boolean checkAccount(String id, String email);
+  public void updatePw(String id, String pw);
 }

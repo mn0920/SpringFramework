@@ -27,5 +27,11 @@
   <select id="getTotalCount" resultType="int">
       select count(id) from account where not(id = #{id}) and not (author = 'super admin');
   </select>
+  <select id="getUserCount" resultType="int">
+    select count(id) from account where id = #{id}
+  </select>
+  <update id="modifyAccount">
+    update account set pw=#{user.pw} , email=#{user.email} , gender=#{user.gender} where id = #{user.id};
+  </update>
 
 </mapper>

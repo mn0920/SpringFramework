@@ -1,21 +1,25 @@
 package kr.green.spring.controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.green.spring.interceptor.LoginInterceptor;
 import kr.green.spring.service.AccountService;
-import kr.green.spring.service.BoardService;
 import kr.green.spring.vo.AccountVo;
 
 /**
@@ -76,6 +80,21 @@ public class AccountController {
 		model.addAttribute("signup", 0);
 		return "redirect:/signup";
 	}
+
+	/* 회원가입 아이디 중복검사 */
+	@RequestMapping(value ="/dup")
+	@ResponseBody
+	public Map<Object, Object> idcheck(@RequestBody String id){
+
+	    Map<Object, Object> map = new HashMap<Object, Object>();
+	    
+	    // 서비스를 이용하여 주어진 id에 대한 회원 정보를 가져온다.
+      // 가져온 정보가 null이면 dup에 false를 null이 아니면 dup에 true를 입력하여 넘겨준다.
+	    boolean dup = accountService.isDuplicated(id); 
+	      
+	    map.put("dup", dup);
+	    return map;
+	}
 	
 	@RequestMapping(value="/signin", method = RequestMethod.GET)
 	public String loginGet() {
@@ -96,4 +115,78 @@ public class AccountController {
 			session.removeAttribute("user");
 			return "redirect:/";
 	}
+	
+	//이메일
+	@Autowired
+	private JavaMailSender mailSender;
+	@RequestMapping(value = "/mail/mailForm")
+	public String mailForm() {
+
+	    return "mail";
+	}  
+
+	// mailSending 코드	
+	@RequestMapping(value="/find/password", method=RequestMethod.GET)
+	public String findPasswordGet(Model model, Boolean fail) {
+	  if(fail == null){
+	    fail = false;
+	  }
+	  model.addAttribute("fail", fail);
+	  return "member/findPassword";
+	}
+  
+  @RequestMapping(value="/find/password", method=RequestMethod.POST)
+  public String findPasswordPost(String id, String email, Model model) {
+    //아이디와 email이 일치하는지 확인
+    //일치하지 않으면 redirect로 /로 보냄
+    if(!accountService.checkAccount(id,email)) {
+      model.addAttribute("fail", true);
+      return "redirect:/find/password";
+    }
+    //비밀번호 8자리 영문자와 숫자를 포함하여 랜덤으로 생성
+    /* 1. 1~62까지 랜덤한 수를 8자리로 생성
+     * 2. 0~9까지는 0~9로
+     *    10~35까지는 A~Z
+     *    36~61까지는 a~z
+     * 3. pw에 위에서 구한 문자를 추가한다.
+     * 4. 1~3과정을 8번 반복한다. */
+    String pw="";
+    for(int i=0; i<8; i++) {
+      int ran = (int)(Math.random()*62);
+      if(ran < 10) {
+        pw += ran;
+      } else if(ran < 36) {
+        pw += (char)(65 - 10 + ran);
+        //대문자 A
+      } else {
+        pw += (char)(97 - 35 + ran);
+        //소문자 a
+      }
+    }
+    
+    accountService.updatePw(id, pw);
+    
+    String setfrom = "1232123@gamil.com";         //보내는 사람 이메일(서버 이메일)
+    String tomail   = email;     // 받는 사람 이메일
+    String title      = "비밀번호 찾기";      // 제목
+    String content = "임시발급 비밀번호는"+pw+"입니다";    // 내용
+
+    try {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper messageHelper 
+            = new MimeMessageHelper(message, true, "UTF-8");
+
+        messageHelper.setFrom(setfrom);    // 보내는사람 생략하거나 하면 정상작동을 안함
+        messageHelper.setTo(tomail);        // 받는사람 이메일
+        messageHelper.setSubject(title);    // 메일제목은 생략이 가능하다
+        messageHelper.setText(content);  // 메일 내용
+
+        mailSender.send(message);
+    } catch(Exception e){
+        System.out.println(e);
+    }
+
+    
+    return "redirect:/";
+  }
 }

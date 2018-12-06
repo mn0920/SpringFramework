@@ -18,4 +18,7 @@ public interface AccountDao {
 	public void setAuthor(@Param("id") String id, @Param("author") String author);
 	public List<AccountVo> getAccountLists(@Param("cri")Criteria cri, @Param("id")String id);
 	public int getTotalCount(@Param("id")String id);
+  public int getUserCount(@Param("id")String id);
+  public AccountVo changePw(@Param("id")String id, @Param("pw")String pw);
+  public void modifyAccount(@Param("user")AccountVo user);
 }

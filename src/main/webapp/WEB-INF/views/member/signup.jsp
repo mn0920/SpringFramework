@@ -6,15 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--  <link rel="stylesheet" href="/spring/resources/css/base_signup.css"> -->
-    
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> 
-    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
     <title>Document</title>
@@ -31,6 +25,7 @@
         <div class="form-group">
             <div class="input-form">아이디 </div>
             <input type="text" name="id" id="id" placeholder="id" class="form-control">
+            <button type="button" id="dup" class="btn btn-outline-primary">중복확인</button>
         </div>
         <div>
             <label id="id-error" class="error" for="id"></label>
@@ -188,6 +183,31 @@
     	    },
     	    "Please check your input."
     	);
+    
+    
+    $("#dup").on("click",function(){
+    	if(!checkValidId()){
+    		alert('아이디는 5~12글자로 숫자와 영문으로 이루어져 있습니다.');
+    		return; //그리고 밑에 있는 것이 실행 안되게 그냥 되돌려준다.
+    	}
+    	  var id = $("#id").val();//id가 id인 input 태그에 입력된 id 가져오기
+    	  $.ajax({
+    	    async:true,
+    	    type:'POST',
+    	    data:id,
+    	    url:"dup",
+    	    dataType:"json",
+    	    contentType:"application/json; charset=UTF-8",
+    	    success : function(data){
+    	    	console.log(data.dup);
+    	      if(data.dup){
+    	        alert("이미 사용중인 아이디입니다.");
+    	      }else{
+    	        alert("사용 가능한 아이디입니다.");
+    	      }
+    	    }
+    	  });
+    	});
     </script>
 </body>
 </html>
